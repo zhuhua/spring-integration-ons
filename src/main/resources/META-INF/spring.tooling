@@ -1,0 +1,4 @@
+# Tooling related information for the integration ons namespace
+http\://www.springframework.org/schema/integration/onsadapter@name=integration ons Namespace
+http\://www.springframework.org/schema/integration/onsadapter@prefix=int-ons
+http\://www.springframework.org/schema/integration/onsadapter@icon=org/springframework/integration/config/xml/spring-integration-ons.gif

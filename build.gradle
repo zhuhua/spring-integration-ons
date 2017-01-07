@@ -1,0 +1,81 @@
+group 'org.springframework.integration'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    maven { url 'http://repo.chinawayltd.com/artifactory/libs-release' }
+}
+
+compileJava {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+compileTestJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+ext {
+    assertjVersion = '2.5.0'
+    jacksonVersion = '2.6.7'
+    log4jVersion = '2.6.2'
+    slf4jVersion = "1.7.21"
+    springIntegrationVersion = '4.3.2.RELEASE'
+    onsClientVersion = '1.2.7.Final'
+
+    linkHomepage = 'https://github.com/spring-projects/spring-integration-extensions'
+    linkCi = 'https://build.spring.io/browse/INTEXT'
+    linkIssue = 'https://jira.spring.io/browse/INTEXT'
+    linkScmUrl = 'https://github.com/spring-projects/spring-integration-extensions'
+    linkScmConnection = 'https://github.com/spring-projects/spring-integration-extensions.git'
+    linkScmDevConnection = 'git@github.com:spring-projects/spring-integration-extensions.git'
+
+}
+
+dependencies {
+    compile "org.springframework.integration:spring-integration-core:$springIntegrationVersion"
+    compile "com.aliyun.openservices:ons-client:$onsClientVersion"
+
+    testCompile "org.springframework.integration:spring-integration-test:$springIntegrationVersion"
+    testCompile "org.assertj:assertj-core:$assertjVersion"
+//    testCompile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+//    testCompile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    testCompile "org.apache.logging.log4j:log4j-core:$log4jVersion"
+    testRuntime "org.slf4j:slf4j-log4j12:$slf4jVersion"
+    testRuntime "org.apache.logging.log4j:log4j-jcl:$log4jVersion"
+}
+
+// enable all compiler warnings; individual projects may customize further
+[compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:all,-options']
+
+
+group 'org.springframework.integration'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+group 'org.springframework.integration'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

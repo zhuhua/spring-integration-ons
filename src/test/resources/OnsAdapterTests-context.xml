@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-ons="http://www.springframework.org/schema/integration/ons"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/ons http://www.springframework.org/schema/integration/ons/spring-integration-ons.xsd">
+
+
+    <bean id="onsClientFactory" class="org.springframework.integration.ons.core.DefaultOnsClientFactory">
+        <property name="accessKey" value="LTAIvCyCD5sVZtrv"/>
+        <property name="secretKey" value="cg11pGBikPZA1WzU8guXqRwo5HeHaT"/>
+        <property name="onsAddr" value="http://onsaddr-internet.aliyun.com/rocketmq/nsaddr4client-internet"/>
+        <property name="producerId" value="PID_colorzh_pub"/>
+        <property name="consumerId" value="CID_colorzh_sub"/>
+    </bean>
+
+    <int:gateway id="onsGateway" service-interface="org.springframework.integration.ons.OnsGateway">
+        <int:method name="publish" request-channel="pubChn" />
+    </int:gateway>
+
+    <!--<int:channel id="pubChn"/>-->
+
+    <!--<int-ons:outbound-channel-adapter client-factory="onsClientFactory"-->
+                                      <!--topic="ColTestTopic" channel="pubChn" async="true"/>-->
+
+    <int:channel id="subChn"/>
+    <int-ons:message-driven-channel-adapter client-factory="onsClientFactory"
+                                            topic="ColTestTopic" channel="subChn" />
+
+
+    <bean id="onsEndpoint" class="org.springframework.integration.ons.OnsEndpoint"/>
+    <int:service-activator ref="onsEndpoint" method="receive" input-channel="subChn" />
+
+
+</beans>
